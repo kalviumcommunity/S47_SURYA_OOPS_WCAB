@@ -155,68 +155,74 @@ class OFFRoad extends Cab {
 
 class Solution {
     public static void main(String[] args) {
-
         Scanner reader = new Scanner(System.in);
-        System.out.println("Welcome to WCAB Services");
         System.out.println("<---------------------------------------------------------------->");
-        System.out.println("Press Any key and press enter to continue.");
-        String demoInput = reader.nextLine();
-        System.out.println("Choose Category of Vehicle:(Note Just Choose the Serial Number)");
-        System.out.println("1.Sedan, 2.SUV, 3.OFF Road");
-        String user_Selected_Category = reader.nextLine();
-        switch (user_Selected_Category) {
+        System.out.println("Welcome to WCAB Services!!");
+        System.out.println("Enter the total No. of Customers traveling and press enter to continue.");
+        int totalUserInput = reader.nextInt();
+        reader.nextLine();  // Consume the leftover newline character
+        Cab[] cabs = new Cab[totalUserInput];
 
-            case "1":
-                System.out.println("Choose your Sub-category of Sedans;");
-                System.out.println("1.Mini Sedan, 2.City Sedan, 3.Luxurious Sedan");
-                String user_Selected_Subcategory_Sedan = reader.nextLine();
+        for (int i = 0; i < totalUserInput; i++) {
+            System.out.println("Select the category of Vehicle for customer " + (i + 1) + ":");
+            System.out.println("1.Sedan, 2.Suv, 3.OFF Road");
+            String user_Selected_Category = reader.nextLine();
+            
+            switch (user_Selected_Category) {
+                case "1":
+                    System.out.println("Choose your Sub-category of Sedans:");
+                    System.out.println("1.Mini Sedan, 2.City Sedan, 3.Luxurious Sedan");
+                    String user_Selected_Subcategory_Sedan = reader.nextLine();
 
-                switch (user_Selected_Subcategory_Sedan) {
-
-                    case "1":
-                        System.out.println("Enter the total expected distance: ");
-                        Double userInputForMiniSedan = reader.nextDouble();
-                        Mini mini_Cab = new Mini(userInputForMiniSedan); 
-                        System.out.println("Your total fair is: " + mini_Cab.getFareForTheCharge() + "INR.");
-                        System.out.println("<---------------------------------------------------------------->");
+                    switch (user_Selected_Subcategory_Sedan) {
+                        case "1":
+                            System.out.println("Enter the total expected distance for Mini Sedan: ");
+                            Double userInputForMiniSedan = reader.nextDouble();
+                            reader.nextLine();  // Consume the leftover newline character
+                            cabs[i] = new Mini(userInputForMiniSedan);
+                            break;
+                        case "2":
+                            System.out.println("Enter the total expected distance for City Sedan: ");
+                            Double userInputForCitySedan = reader.nextDouble();
+                            reader.nextLine();  // Consume the leftover newline character
+                            cabs[i] = new Sedan(userInputForCitySedan);
+                            break;
+                        case "3":
+                            System.out.println("Enter the total expected distance for Luxurious Sedan: ");
+                            Double userInputForLuxuriousSedan = reader.nextDouble();
+                            reader.nextLine();  // Consume the leftover newline character
+                            cabs[i] = new Luxurious_Sedan(userInputForLuxuriousSedan);
+                            break;
+                        default:
+                            System.out.println("Invalid Category Selected");
+                            i--;  // Decrement counter to retry input for the same customer
+                            break;
+                    }
                     break;
-
-                    case "2":
-                        System.out.println("Enter the total expected distance: ");
-                        Double userInputForCitySedan = reader.nextDouble();
-                        Sedan sedan_Cab = new Sedan(userInputForCitySedan);
-                        System.out.println("Your total fair is: " + sedan_Cab.getFareForTheCharge() + "INR.");
-                        System.out.println("<---------------------------------------------------------------->");
+                case "2":
+                    System.out.println("Enter the total expected distance for SUV: ");
+                    Double userInputForSUV = reader.nextDouble();
+                    reader.nextLine();  // Consume the leftover newline character
+                    cabs[i] = new SUV(userInputForSUV);
                     break;
-
-                    case "3":
-                        System.out.println("Enter the total expected distance: ");
-                        Double userInputForLuxuriousSedan = reader.nextDouble();
-                        Luxurious_Sedan luxury_Sedan_Cab = new Luxurious_Sedan(userInputForLuxuriousSedan);
-                        System.out.println("Your total fair is: " + luxury_Sedan_Cab.getFareForTheCharge() + "INR.");
-                        System.out.println("<---------------------------------------------------------------->");
+                case "3":
+                    System.out.println("Enter the total expected distance for OFF Road: ");
+                    Double userInputOFFRoad = reader.nextDouble();
+                    reader.nextLine();  // Consume the leftover newline character
+                    cabs[i] = new OFFRoad(userInputOFFRoad);
                     break;
-
-                }
-
-                break;
-        
-            case "2":
-                System.out.println("Enter the total expected distance: ");
-                Double userInputForSUV = reader.nextDouble();
-                SUV mySuv = new SUV(userInputForSUV);
-                System.out.println("Your total fair is: " + mySuv.getFareForTheCharge() + "INR.");
-                System.out.println("<---------------------------------------------------------------->");
-            break;
-
-            case "3":
-                System.out.println("Enter the total expected distance: ");
-                Double userInputOFFRoad = reader.nextDouble();
-                OFFRoad myOFFRoadVehicle = new OFFRoad(userInputOFFRoad);
-                System.out.println("Your total fair is: " + myOFFRoadVehicle.getFareForTheCharge() + "INR.");
-                System.out.println("<---------------------------------------------------------------->");
-            break;
+                default:
+                    System.out.println("Invalid Category Selected");
+                    i--;  // Decrement counter to retry input for the same customer
+                    break;
+            }
         }
+
+        System.out.println("Total Fare Calculations:");
+        for (int j = 0; j < totalUserInput; j++) {
+            System.out.println("Customer " + (j + 1) + " fare: " + cabs[j].getFareForTheCharge() + " INR.");
+        }
+        System.out.println("<---------------------------------------------->");
         reader.close();
     }
 }
