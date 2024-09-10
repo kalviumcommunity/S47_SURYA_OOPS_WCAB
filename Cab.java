@@ -160,7 +160,7 @@ class Solution {
         System.out.println("Welcome to WCAB Services!!");
         System.out.println("Enter the total No. of Customers traveling and press enter to continue.");
         int totalUserInput = reader.nextInt();
-        reader.nextLine();  // Consume the leftover newline character
+        reader.nextLine(); 
         Cab[] cabs = new Cab[totalUserInput];
 
         for (int i = 0; i < totalUserInput; i++) {
@@ -178,42 +178,42 @@ class Solution {
                         case "1":
                             System.out.println("Enter the total expected distance for Mini Sedan: ");
                             Double userInputForMiniSedan = reader.nextDouble();
-                            reader.nextLine();  // Consume the leftover newline character
-                            cabs[i] = new Mini(userInputForMiniSedan);
+                            reader.nextLine(); 
+                            cabs[i] = new Mini(userInputForMiniSedan); // Implementing dynamic memory creation using the new keyword  for mini sedan cab
                             break;
                         case "2":
                             System.out.println("Enter the total expected distance for City Sedan: ");
                             Double userInputForCitySedan = reader.nextDouble();
-                            reader.nextLine();  // Consume the leftover newline character
-                            cabs[i] = new Sedan(userInputForCitySedan);
+                            reader.nextLine(); 
+                            cabs[i] = new Sedan(userInputForCitySedan); // Implementing dynamic memory creation using the new keyword  for city sedan cab
                             break;
                         case "3":
                             System.out.println("Enter the total expected distance for Luxurious Sedan: ");
                             Double userInputForLuxuriousSedan = reader.nextDouble();
-                            reader.nextLine();  // Consume the leftover newline character
-                            cabs[i] = new Luxurious_Sedan(userInputForLuxuriousSedan);
+                            reader.nextLine(); 
+                            cabs[i] = new Luxurious_Sedan(userInputForLuxuriousSedan); // Implementing dynamic memory creation using the new keyword  for Luxurious sedan
                             break;
                         default:
                             System.out.println("Invalid Category Selected");
-                            i--;  // Decrement counter to retry input for the same customer
+                            i--;  
                             break;
                     }
                     break;
                 case "2":
                     System.out.println("Enter the total expected distance for SUV: ");
                     Double userInputForSUV = reader.nextDouble();
-                    reader.nextLine();  // Consume the leftover newline character
-                    cabs[i] = new SUV(userInputForSUV);
+                    reader.nextLine(); 
+                    cabs[i] = new SUV(userInputForSUV); // Implementing dynamic memory creation using the new keyword  for SUV Class
                     break;
                 case "3":
                     System.out.println("Enter the total expected distance for OFF Road: ");
                     Double userInputOFFRoad = reader.nextDouble();
-                    reader.nextLine();  // Consume the leftover newline character
-                    cabs[i] = new OFFRoad(userInputOFFRoad);
+                    reader.nextLine(); 
+                    cabs[i] = new OFFRoad(userInputOFFRoad); // Implementing dynamic memory creation using the new keyword  for OFF Road Class
                     break;
                 default:
                     System.out.println("Invalid Category Selected");
-                    i--;  // Decrement counter to retry input for the same customer
+                    i--;  
                     break;
             }
         }
