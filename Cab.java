@@ -5,12 +5,16 @@ abstract class Cab {
     protected Double chargesForTheNext15km;
     protected Double additionalDistanceCharge;
     protected Double userEnteredInput;
-    
+
+    public static int totalRides = 0;
+    public static double totalFareCollected = 0.00;
+
     public Cab(Double baseCharge, Double chargesForTheNext15km, Double additionalDistanceCharge, Double userEnteredInput) {
         this.baseCharge = baseCharge;
         this.chargesForTheNext15km = chargesForTheNext15km;
         this.additionalDistanceCharge = additionalDistanceCharge;
         this.userEnteredInput = userEnteredInput;
+        totalRides++;
     }
 
     public abstract Double getFareForTheCharge();
@@ -28,17 +32,20 @@ class Mini extends Cab {
     }
 
     public Double getFareForTheCharge() {
+        double fare;
         if(userEnteredInput >= 75){
-            return OTHER_DISTANCE_CHARGES * userEnteredInput;
+            fare = OTHER_DISTANCE_CHARGES * userEnteredInput;
         }else if (userEnteredInput <= 3) {
-            return CHARGES_FOR_THE_BASE_CASE * userEnteredInput;
+            fare = CHARGES_FOR_THE_BASE_CASE * userEnteredInput;
         } else if (userEnteredInput <= 18) {
             otherFifteenKm = userEnteredInput - 3;
-            return CHARGES_FOR_THE_BASE_CASE * 3  + (otherFifteenKm * CHARGES_FOR_THE_NEXT_15KM);
+            fare = CHARGES_FOR_THE_BASE_CASE * 3  + (otherFifteenKm * CHARGES_FOR_THE_NEXT_15KM);
         } else {
             restDistance = userEnteredInput - 18;
-            return CHARGES_FOR_THE_BASE_CASE * 3 + (CHARGES_FOR_THE_NEXT_15KM * 15) + (restDistance * OTHER_DISTANCE_CHARGES);
+            fare = CHARGES_FOR_THE_BASE_CASE * 3 + (CHARGES_FOR_THE_NEXT_15KM * 15) + (restDistance * OTHER_DISTANCE_CHARGES);
         }
+        totalFareCollected += fare;
+        return  fare;
     }
 }
 
@@ -55,17 +62,20 @@ class Sedan extends Cab {
     }
 
     public Double getFareForTheCharge() {
+        double fare;
         if(userEnteredInput >= 100){
-            return OTHER_DISTANCE_CHARGES * userEnteredInput;
+            fare = OTHER_DISTANCE_CHARGES * userEnteredInput;
         } else if (userEnteredInput <= 5) {
-            return CHARGES_FOR_THE_BASE_CASE * userEnteredInput;
+            fare = CHARGES_FOR_THE_BASE_CASE * userEnteredInput;
         } else if (userEnteredInput <= 20) {
             otherFifteenKm = userEnteredInput - 5;
-            return CHARGES_FOR_THE_BASE_CASE * 5  + (otherFifteenKm * CHARGES_FOR_THE_NEXT_15KM);
+            fare = CHARGES_FOR_THE_BASE_CASE * 5  + (otherFifteenKm * CHARGES_FOR_THE_NEXT_15KM);
         } else {
             restDistance = userEnteredInput - 20;
-            return CHARGES_FOR_THE_BASE_CASE * 5 + (CHARGES_FOR_THE_NEXT_15KM * 15) + (restDistance * OTHER_DISTANCE_CHARGES);
+            fare = CHARGES_FOR_THE_BASE_CASE * 5 + (CHARGES_FOR_THE_NEXT_15KM * 15) + (restDistance * OTHER_DISTANCE_CHARGES);
         }
+        totalFareCollected += fare;
+        return fare;
     }
 
 }
@@ -84,17 +94,20 @@ class Luxurious_Sedan extends Cab {
     }
 
     public Double getFareForTheCharge() {
+        double fare;
         if(userEnteredInput >= 100){
-            return OTHER_DISTANCE_CHARGES * userEnteredInput;
+            fare = OTHER_DISTANCE_CHARGES * userEnteredInput;
         } else if (userEnteredInput <= 5) {
-            return CHARGES_FOR_THE_BASE_CASE * userEnteredInput;
+            fare = CHARGES_FOR_THE_BASE_CASE * userEnteredInput;
         } else if (userEnteredInput <= 20) {
             otherFifteenKm = userEnteredInput - 5;
-            return CHARGES_FOR_THE_BASE_CASE * 5 + (otherFifteenKm * CHARGES_FOR_THE_NEXT_15KM);
+            fare = CHARGES_FOR_THE_BASE_CASE * 5 + (otherFifteenKm * CHARGES_FOR_THE_NEXT_15KM);
         } else {
             restDistance = userEnteredInput - 20;
-            return CHARGES_FOR_THE_BASE_CASE * 5  + (CHARGES_FOR_THE_NEXT_15KM * 15) + (restDistance * OTHER_DISTANCE_CHARGES);
+            fare = CHARGES_FOR_THE_BASE_CASE * 5  + (CHARGES_FOR_THE_NEXT_15KM * 15) + (restDistance * OTHER_DISTANCE_CHARGES);
         }
+        totalFareCollected += fare;
+        return fare;
     }
 
 }
@@ -113,15 +126,18 @@ class SUV extends Cab {
     }
 
     public Double getFareForTheCharge() {
+        double fare;
         if (userEnteredInput <= 5) {
-            return CHARGES_FOR_THE_BASE_CASE * userEnteredInput;
+            fare = CHARGES_FOR_THE_BASE_CASE * userEnteredInput;
         } else if (userEnteredInput <= 20) {
             otherFifteenKm = userEnteredInput - 5;
-            return CHARGES_FOR_THE_BASE_CASE * 5  + (otherFifteenKm * CHARGES_FOR_THE_NEXT_15KM);
+            fare = CHARGES_FOR_THE_BASE_CASE * 5  + (otherFifteenKm * CHARGES_FOR_THE_NEXT_15KM);
         } else {
             restDistance = userEnteredInput - 20;
-            return CHARGES_FOR_THE_BASE_CASE * 5  + (CHARGES_FOR_THE_NEXT_15KM * 15) + (restDistance * OTHER_DISTANCE_CHARGES);
+            fare = CHARGES_FOR_THE_BASE_CASE * 5  + (CHARGES_FOR_THE_NEXT_15KM * 15) + (restDistance * OTHER_DISTANCE_CHARGES);
         }
+        totalFareCollected += fare;
+        return fare;
     }
 
 }
@@ -140,15 +156,18 @@ class OFFRoad extends Cab {
     }
 
     public Double getFareForTheCharge() {
+        double fare;
         if (userEnteredInput <= 5) {
-            return CHARGES_FOR_THE_BASE_CASE * userEnteredInput;
+            fare = CHARGES_FOR_THE_BASE_CASE * userEnteredInput;
         } else if (userEnteredInput <= 20) {
             otherFifteenKm = userEnteredInput - 5;
-            return CHARGES_FOR_THE_BASE_CASE * 5  + (otherFifteenKm * CHARGES_FOR_THE_NEXT_15KM);
+            fare = CHARGES_FOR_THE_BASE_CASE * 5  + (otherFifteenKm * CHARGES_FOR_THE_NEXT_15KM);
         } else {
             restDistance = userEnteredInput - 20;
-            return CHARGES_FOR_THE_BASE_CASE * 5  + (CHARGES_FOR_THE_NEXT_15KM * 15) + (restDistance * OTHER_DISTANCE_CHARGES);
+            fare = CHARGES_FOR_THE_BASE_CASE * 5  + (CHARGES_FOR_THE_NEXT_15KM * 15) + (restDistance * OTHER_DISTANCE_CHARGES);
         }
+        totalFareCollected += fare;
+        return fare;
     }
 
 }
@@ -222,6 +241,8 @@ class Solution {
         for (int j = 0; j < totalUserInput; j++) {
             System.out.println("Customer " + (j + 1) + " fare: " + cabs[j].getFareForTheCharge() + " INR.");
         }
+        System.out.println("Total Rides till Now. " + Cab.totalRides);
+        System.out.println("Total Fare Collected till Now. " + Cab.totalFareCollected);
         System.out.println("<---------------------------------------------->");
         reader.close();
     }
