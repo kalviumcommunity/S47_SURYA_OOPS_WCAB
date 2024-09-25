@@ -17,6 +17,11 @@ abstract class Cab {
         totalRides++;
     }
 
+    public static void displayUserHistory(){
+        System.out.println("Total Rides till Now. " + totalRides);
+        System.out.println("Total Fare Collected till Now. " + totalFareCollected + " INR.");
+    }
+
     public abstract Double getFareForTheCharge();
 }
 
@@ -175,7 +180,7 @@ class OFFRoad extends Cab {
 class Solution {
     public static void main(String[] args) {
         Scanner reader = new Scanner(System.in);
-        System.out.println("<---------------------------------------------------------------->");
+        System.out.println("<---------------------------------------------->");
         System.out.println("Welcome to WCAB Services!!");
         System.out.println("Enter the total No. of Customers traveling and press enter to continue.");
         int totalUserInput = reader.nextInt();
@@ -241,8 +246,7 @@ class Solution {
         for (int j = 0; j < totalUserInput; j++) {
             System.out.println("Customer " + (j + 1) + " fare: " + cabs[j].getFareForTheCharge() + " INR.");
         }
-        System.out.println("Total Rides till Now. " + Cab.totalRides);
-        System.out.println("Total Fare Collected till Now. " + Cab.totalFareCollected);
+        Cab.displayUserHistory();
         System.out.println("<---------------------------------------------->");
         reader.close();
     }
