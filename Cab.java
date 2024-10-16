@@ -1,5 +1,6 @@
 import java.util.*;
 
+//* Created an abstract class which will serve as a base class */
 abstract class Vehicle {
     protected Double baseCharge;
     protected Double chargesForTheNext15km;
@@ -58,9 +59,9 @@ class Mini extends Vehicle {
 // Implemented encapsulation by wrapping method and variables in the same class
 class Sedan extends Vehicle {
 
-    final private Double CHARGES_FOR_THE_BASE_CASE = 80.00; //*final variable which can be used in the same class and the derived class */
-    final private Double CHARGES_FOR_THE_NEXT_15KM = 12.00; //*final variable which can be used in the same class and the derived class */
-    final private Double OTHER_DISTANCE_CHARGES = 10.00; //*final variable which can be used in the same class and the derived class */
+    final private Double CHARGES_FOR_THE_BASE_CASE = 80.00; //*Protected variable which can be used in the same class and the derived class */
+    final private Double CHARGES_FOR_THE_NEXT_15KM = 12.00; //*Protected variable which can be used in the same class and the derived class */
+    final private Double OTHER_DISTANCE_CHARGES = 10.00; //*Protected variable which can be used in the same class and the derived class */
     private Double otherFifteenKm;
     private Double restDistance;
 
@@ -90,9 +91,9 @@ class Sedan extends Vehicle {
 // Implemented encapsulation by wrapping method and variables in the same class
 class Luxurious_Sedan extends Vehicle {
 
-    final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*final variable which can be used in the same class and the derived class */
-    final private Double CHARGES_FOR_THE_NEXT_15KM = 25.00; //*final variable which can be used in the same class and the derived class */
-    final private Double OTHER_DISTANCE_CHARGES = 25.00; //*final variable which can be used in the same class and the derived class */
+    final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*Protected variable which can be used in the same class and the derived class */
+    final private Double CHARGES_FOR_THE_NEXT_15KM = 25.00; //*Protected variable which can be used in the same class and the derived class */
+    final private Double OTHER_DISTANCE_CHARGES = 25.00; //*Protected variable which can be used in the same class and the derived class */
     private Double otherFifteenKm;
     private Double restDistance;
 
@@ -122,9 +123,9 @@ class Luxurious_Sedan extends Vehicle {
 // Implemented encapsulation by wrapping method and variables in the same class
 class SUV extends Vehicle {
 
-    final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*final variable which can be used in the same class and the derived class */
-    final private Double CHARGES_FOR_THE_NEXT_15KM = 15.00; //*final variable which can be used in the same class and the derived class */
-    final private Double OTHER_DISTANCE_CHARGES = 12.00; //*final variable which can be used in the same class and the derived class */
+    final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*Protected variable which can be used in the same class and the derived class */
+    final private Double CHARGES_FOR_THE_NEXT_15KM = 15.00; //*Protected variable which can be used in the same class and the derived class */
+    final private Double OTHER_DISTANCE_CHARGES = 12.00; //*Protected variable which can be used in the same class and the derived class */
     private Double otherFifteenKm;
     private Double restDistance;
 
@@ -152,9 +153,9 @@ class SUV extends Vehicle {
 // Implemented encapsulation by wrapping method and variables in the same class
 class OFFRoad extends Vehicle {
 
-    final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*final variable which can be used in the same class and the derived class */
-    final private Double CHARGES_FOR_THE_NEXT_15KM = 20.00; //*final variable which can be used in the same class and the derived class */
-    final private Double OTHER_DISTANCE_CHARGES = 25.00; //*final variable which can be used in the same class and the derived class */
+    final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*Protected variable which can be used in the same class and the derived class */
+    final private Double CHARGES_FOR_THE_NEXT_15KM = 20.00; //*Protected variable which can be used in the same class and the derived class */
+    final private Double OTHER_DISTANCE_CHARGES = 25.00; //*Protected variable which can be used in the same class and the derived class */
     private Double otherFifteenKm;
     private Double restDistance;
 
