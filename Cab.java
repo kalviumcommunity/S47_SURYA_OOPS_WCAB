@@ -25,6 +25,7 @@ abstract class Cab {
     public abstract Double getFareForTheCharge();
 }
 
+// Implemented encapsulation by wrapping method and variables in the same class
 class Mini extends Cab {
     final private Double CHARGES_FOR_THE_BASE_CASE = 50.00; 
     final private Double CHARGES_FOR_THE_NEXT_15KM = 10.00; 
@@ -54,6 +55,7 @@ class Mini extends Cab {
     }
 }
 
+// Implemented encapsulation by wrapping method and variables in the same class
 class Sedan extends Cab {
 
     final private Double CHARGES_FOR_THE_BASE_CASE = 80.00; 
@@ -85,7 +87,7 @@ class Sedan extends Cab {
 
 }
 
-
+// Implemented encapsulation by wrapping method and variables in the same class
 class Luxurious_Sedan extends Cab {
 
     final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; 
@@ -117,7 +119,7 @@ class Luxurious_Sedan extends Cab {
 
 }
 
-
+// Implemented encapsulation by wrapping method and variables in the same class
 class SUV extends Cab {
 
     final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; 
@@ -147,7 +149,7 @@ class SUV extends Cab {
 
 }
 
-
+// Implemented encapsulation by wrapping method and variables in the same class
 class OFFRoad extends Cab {
 
     final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; 
