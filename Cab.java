@@ -1,10 +1,11 @@
 import java.util.*;
 
+//* created an abstract class as a base class */
 abstract class Cab {
-    protected Double baseCharge;
-    protected Double chargesForTheNext15km;
-    protected Double additionalDistanceCharge;
-    protected Double userEnteredInput;
+    protected Double baseCharge; //* protected variable which will only be used with in the class only */
+    protected Double chargesForTheNext15km; //* protected variable which will only be used with in the class only */
+    protected Double additionalDistanceCharge; //* protected variable which will only be used with in the class only */
+    protected Double userEnteredInput; //* protected variable which will only be used with in the class only */
 
     public static int totalRides = 0;
     public static double totalFareCollected = 0.00;
@@ -27,9 +28,9 @@ abstract class Cab {
 
 // Implemented encapsulation by wrapping method and variables in the same class
 class Mini extends Cab {
-    final private Double CHARGES_FOR_THE_BASE_CASE = 50.00; 
-    final private Double CHARGES_FOR_THE_NEXT_15KM = 10.00; 
-    final private Double OTHER_DISTANCE_CHARGES = 8.00; 
+    final private Double CHARGES_FOR_THE_BASE_CASE = 50.00; //*final variable which can be used in the same class and the derived class */
+    final private Double CHARGES_FOR_THE_NEXT_15KM = 10.00; //*final variable which can be used in the same class and the derived class */
+    final private Double OTHER_DISTANCE_CHARGES = 8.00; //*final variable which can be used in the same class and the derived class */
     private Double otherFifteenKm;
     private Double restDistance;
         
@@ -58,9 +59,9 @@ class Mini extends Cab {
 // Implemented encapsulation by wrapping method and variables in the same class
 class Sedan extends Cab {
 
-    final private Double CHARGES_FOR_THE_BASE_CASE = 80.00; 
-    final private Double CHARGES_FOR_THE_NEXT_15KM = 12.00; 
-    final private Double OTHER_DISTANCE_CHARGES = 10.00; 
+    final private Double CHARGES_FOR_THE_BASE_CASE = 80.00; //*final variable which can be used in the same class and the derived class */
+    final private Double CHARGES_FOR_THE_NEXT_15KM = 12.00; //*final variable which can be used in the same class and the derived class */
+    final private Double OTHER_DISTANCE_CHARGES = 10.00; //*final variable which can be used in the same class and the derived class */
     private Double otherFifteenKm;
     private Double restDistance;
 
@@ -90,9 +91,9 @@ class Sedan extends Cab {
 // Implemented encapsulation by wrapping method and variables in the same class
 class Luxurious_Sedan extends Cab {
 
-    final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; 
-    final private Double CHARGES_FOR_THE_NEXT_15KM = 25.00; 
-    final private Double OTHER_DISTANCE_CHARGES = 25.00; 
+    final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*final variable which can be used in the same class and the derived class */
+    final private Double CHARGES_FOR_THE_NEXT_15KM = 25.00; //*final variable which can be used in the same class and the derived class */
+    final private Double OTHER_DISTANCE_CHARGES = 25.00; //*final variable which can be used in the same class and the derived class */
     private Double otherFifteenKm;
     private Double restDistance;
 
@@ -122,9 +123,9 @@ class Luxurious_Sedan extends Cab {
 // Implemented encapsulation by wrapping method and variables in the same class
 class SUV extends Cab {
 
-    final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; 
-    final private Double CHARGES_FOR_THE_NEXT_15KM = 15.00; 
-    final private Double OTHER_DISTANCE_CHARGES = 12.00; 
+    final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*final variable which can be used in the same class and the derived class */
+    final private Double CHARGES_FOR_THE_NEXT_15KM = 15.00; //*final variable which can be used in the same class and the derived class */
+    final private Double OTHER_DISTANCE_CHARGES = 12.00; //*final variable which can be used in the same class and the derived class */
     private Double otherFifteenKm;
     private Double restDistance;
 
@@ -152,9 +153,9 @@ class SUV extends Cab {
 // Implemented encapsulation by wrapping method and variables in the same class
 class OFFRoad extends Cab {
 
-    final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; 
-    final private Double CHARGES_FOR_THE_NEXT_15KM = 20.00; 
-    final private Double OTHER_DISTANCE_CHARGES = 25.00; 
+    final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*final variable which can be used in the same class and the derived class */
+    final private Double CHARGES_FOR_THE_NEXT_15KM = 20.00; //*final variable which can be used in the same class and the derived class */
+    final private Double OTHER_DISTANCE_CHARGES = 25.00; //*final variable which can be used in the same class and the derived class */
     private Double otherFifteenKm;
     private Double restDistance;
 
