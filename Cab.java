@@ -10,6 +10,7 @@ abstract class Vehicle {
     public static int totalRides = 0;
     public static double totalFareCollected = 0.00;
 
+    //* created a constructor */
     public Vehicle(Double baseCharge, Double chargesForTheNext15km, Double additionalDistanceCharge, Double userEnteredInput) {
         this.baseCharge = baseCharge;
         this.chargesForTheNext15km = chargesForTheNext15km;
@@ -34,6 +35,7 @@ class Mini extends Vehicle {
     private Double otherFifteenKm;
     private Double restDistance;
         
+    //* Using that initialised constructor using the super keyword */
     public Mini(Double userEnteredInput) {
         super(50.00, 10.00, 8.00, userEnteredInput);
     }
@@ -64,6 +66,8 @@ class Sedan extends Vehicle {
     final private Double OTHER_DISTANCE_CHARGES = 10.00; //*Protected variable which can be used in the same class and the derived class */
     private Double otherFifteenKm;
     private Double restDistance;
+
+    //* Using that initialised constructor using the super keyword */
 
     public Sedan(Double userEnteredInput) {
         super(80.00, 12.00, 10.00, userEnteredInput);
@@ -97,6 +101,7 @@ class Luxurious_Sedan extends Vehicle {
     private Double otherFifteenKm;
     private Double restDistance;
 
+    //* Using that initialised constructor using the super keyword */
     public Luxurious_Sedan(Double userInputForLuxuriousSedan) {
         super(100.00, 25.00, 25.00, userInputForLuxuriousSedan);
     }
@@ -129,6 +134,7 @@ class SUV extends Vehicle {
     private Double otherFifteenKm;
     private Double restDistance;
 
+    //* Using that initialised constructor using the super keyword */
     public SUV(Double userEnteredInput) {
         super(100.00, 15.00, 12.00, userEnteredInput);
     }
@@ -159,6 +165,7 @@ class OFFRoad extends Vehicle {
     private Double otherFifteenKm;
     private Double restDistance;
 
+    //* Using that initialised constructor using the super keyword */
     public OFFRoad(Double userEnteredInput) {
         super(100.00, 20.00, 25.00, userEnteredInput);
     }
