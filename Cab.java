@@ -1,4 +1,4 @@
-import java.util.*;
+import java.util.Scanner;
 
 //* Created an abstract class which will serve as a base class */
 abstract class Vehicle {
@@ -11,7 +11,7 @@ abstract class Vehicle {
     public static double totalFareCollected = 0.00;
 
     //* created a constructor */
-    public Vehicle(Double baseCharge, Double chargesForTheNext15km, Double additionalDistanceCharge, Double userEnteredInput) {
+    protected Vehicle(Double baseCharge, Double chargesForTheNext15km, Double additionalDistanceCharge, Double userEnteredInput) {
         this.baseCharge = baseCharge;
         this.chargesForTheNext15km = chargesForTheNext15km;
         this.additionalDistanceCharge = additionalDistanceCharge;
@@ -38,6 +38,16 @@ class Mini extends Vehicle {
     //* Using that initialised constructor using the super keyword */
     public Mini(Double userEnteredInput) {
         super(50.00, 10.00, 8.00, userEnteredInput);
+    }
+
+    //*  Accessor for userEnteredInput */
+    public Double getUserEnteredInput() {
+        return userEnteredInput; 
+    }
+
+    //*  Mutator for userEnteredInput */
+    public void setUserEnteredInput(Double userEnteredInput) {
+        this.userEnteredInput = userEnteredInput;
     }
 
     public Double getFareForTheCharge() {
@@ -73,6 +83,16 @@ class Sedan extends Vehicle {
         super(80.00, 12.00, 10.00, userEnteredInput);
     }
 
+    //*  Accessor for userEnteredInput */
+    public Double getUserEnteredInput() {
+        return userEnteredInput; 
+    }
+
+    //*  Mutator for userEnteredInput */
+    public void setUserEnteredInput(Double userEnteredInput) {
+        this.userEnteredInput = userEnteredInput;
+    }
+
     public Double getFareForTheCharge() {
         double fare;
         if(userEnteredInput >= 100){
@@ -106,6 +126,16 @@ class Luxurious_Sedan extends Vehicle {
         super(100.00, 25.00, 25.00, userInputForLuxuriousSedan);
     }
 
+    //*  Accessor for userEnteredInput */
+    public Double getUserEnteredInput() {
+        return userEnteredInput; 
+    }
+
+    //*  Mutator for userEnteredInput */
+    public void setUserEnteredInput(Double userEnteredInput) {
+        this.userEnteredInput = userEnteredInput;
+    }
+
     public Double getFareForTheCharge() {
         double fare;
         if(userEnteredInput >= 100){
@@ -134,9 +164,19 @@ class SUV extends Vehicle {
     private Double otherFifteenKm;
     private Double restDistance;
 
-    //* Using that initialised constructor using the super keyword */
+    //* Using that initialized constructor using the super keyword */
     public SUV(Double userEnteredInput) {
         super(100.00, 15.00, 12.00, userEnteredInput);
+    }
+
+    //*  Accessor for userEnteredInput */
+    public Double getUserEnteredInput() {
+        return userEnteredInput; 
+    }
+
+    //*  Mutator for userEnteredInput */
+    public void setUserEnteredInput(Double userEnteredInput) {
+        this.userEnteredInput = userEnteredInput;
     }
 
     public Double getFareForTheCharge() {
@@ -168,6 +208,16 @@ class OFFRoad extends Vehicle {
     //* Using that initialised constructor using the super keyword */
     public OFFRoad(Double userEnteredInput) {
         super(100.00, 20.00, 25.00, userEnteredInput);
+    }
+
+    //*  Accessor for userEnteredInput */
+    public Double getUserEnteredInput() {
+        return userEnteredInput; 
+    }
+
+    //*  Mutator for userEnteredInput */
+    public void setUserEnteredInput(Double userEnteredInput) {
+        this.userEnteredInput = userEnteredInput;
     }
 
     public Double getFareForTheCharge() {
