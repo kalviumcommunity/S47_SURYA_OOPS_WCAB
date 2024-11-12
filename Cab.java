@@ -27,7 +27,8 @@ abstract class Vehicle {
     public abstract Double getFareForTheCharge();
 }
 
-// Implemented encapsulation by wrapping method and variables in the same class
+//* Implemented encapsulation by wrapping method and variables in the same class */
+//* Implemented Multilevel inheritance by using the property of the base Vehicle class */ 
 class Mini extends Vehicle {
     final private Double CHARGES_FOR_THE_BASE_CASE = 50.00; 
     final private Double CHARGES_FOR_THE_NEXT_15KM = 10.00; 
@@ -35,7 +36,7 @@ class Mini extends Vehicle {
     private Double otherFifteenKm;
     private Double restDistance;
         
-    //* Using that initialised constructor using the super keyword */
+    //* Using that initialized constructor using the super keyword */
     public Mini(Double userEnteredInput) {
         super(50.00, 10.00, 8.00, userEnteredInput);
     }
@@ -68,8 +69,9 @@ class Mini extends Vehicle {
     }
 }
 
-// Implemented encapsulation by wrapping method and variables in the same class
-class Sedan extends Vehicle {
+//* Implemented encapsulation by wrapping method and variables in the same class */ 
+//* Implemented Hierarchial inheritance by using the property of one of the Derived Mini class */
+class Sedan extends Mini {
 
     final private Double CHARGES_FOR_THE_BASE_CASE = 80.00; //*Protected variable which can be used in the same class and the derived class */
     final private Double CHARGES_FOR_THE_NEXT_15KM = 12.00; //*Protected variable which can be used in the same class and the derived class */
@@ -77,10 +79,10 @@ class Sedan extends Vehicle {
     private Double otherFifteenKm;
     private Double restDistance;
 
-    //* Using that initialised constructor using the super keyword */
+    //* Using that initialized constructor using the super keyword */
 
     public Sedan(Double userEnteredInput) {
-        super(80.00, 12.00, 10.00, userEnteredInput);
+        super(userEnteredInput);
     }
 
     //*  Accessor for userEnteredInput */
@@ -112,7 +114,8 @@ class Sedan extends Vehicle {
 
 }
 
-// Implemented encapsulation by wrapping method and variables in the same class
+//* Implemented encapsulation by wrapping method and variables in the same class */ 
+//* Implemented Hierarchial inheritance by using the property of one of the Derived Mini class */
 class Luxurious_Sedan extends Vehicle {
 
     final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*Protected variable which can be used in the same class and the derived class */
@@ -121,7 +124,7 @@ class Luxurious_Sedan extends Vehicle {
     private Double otherFifteenKm;
     private Double restDistance;
 
-    //* Using that initialised constructor using the super keyword */
+    //* Using that initialized constructor using the super keyword */
     public Luxurious_Sedan(Double userInputForLuxuriousSedan) {
         super(100.00, 25.00, 25.00, userInputForLuxuriousSedan);
     }
@@ -136,6 +139,7 @@ class Luxurious_Sedan extends Vehicle {
         this.userEnteredInput = userEnteredInput;
     }
 
+    @Override
     public Double getFareForTheCharge() {
         double fare;
         if(userEnteredInput >= 100){
@@ -155,7 +159,8 @@ class Luxurious_Sedan extends Vehicle {
 
 }
 
-// Implemented encapsulation by wrapping method and variables in the same class
+//* Implemented encapsulation by wrapping method and variables in the same class */
+//* Implemented Multilevel inheritance by using the property of base Vehicle class */
 class SUV extends Vehicle {
 
     final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*Protected variable which can be used in the same class and the derived class */
@@ -179,6 +184,7 @@ class SUV extends Vehicle {
         this.userEnteredInput = userEnteredInput;
     }
 
+    @Override
     public Double getFareForTheCharge() {
         double fare;
         if (userEnteredInput <= 5) {
@@ -196,7 +202,8 @@ class SUV extends Vehicle {
 
 }
 
-// Implemented encapsulation by wrapping method and variables in the same class
+//* Implemented encapsulation by wrapping method and variables in the same class */ 
+//* Implemented Multilevel inheritance by using the property of base Vehicle class */
 class OFFRoad extends Vehicle {
 
     final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*Protected variable which can be used in the same class and the derived class */
@@ -205,7 +212,7 @@ class OFFRoad extends Vehicle {
     private Double otherFifteenKm;
     private Double restDistance;
 
-    //* Using that initialised constructor using the super keyword */
+    //* Using that initialized constructor using the super keyword */
     public OFFRoad(Double userEnteredInput) {
         super(100.00, 20.00, 25.00, userEnteredInput);
     }
@@ -220,6 +227,7 @@ class OFFRoad extends Vehicle {
         this.userEnteredInput = userEnteredInput;
     }
 
+    @Override
     public Double getFareForTheCharge() {
         double fare;
         if (userEnteredInput <= 5) {
