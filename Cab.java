@@ -25,6 +25,7 @@ abstract class Vehicle {
     }
 
     //* Creating a method which will have there own implementation in the derived class by using polymorphism  */
+    //* This method will be serving as a virtual method */
     public abstract Double getFareForTheCharge();
 }
 
@@ -53,6 +54,7 @@ class Mini extends Vehicle {
     }
 
     // * Using the concept of Run time polymorphism and creating a function which will be created during the run time  */
+    //* Using the concept of Virtual function and overriding this method in the derived class */
     @Override
     public Double getFareForTheCharge() {
         double fare;
@@ -99,6 +101,7 @@ class Sedan extends Mini {
     }
 
     // * Using the concept of Run time polymorphism and creating a function which will be created during the run time  */
+    //* Using the concept of Virtual function and overriding this method in the derived class */
     @Override
     public Double getFareForTheCharge() {
         double fare;
@@ -145,6 +148,7 @@ class Luxurious_Sedan extends Vehicle {
     }
 
     // * Using the concept of Run time polymorphism and creating a function which will be created during the run time  */
+    //* Using the concept of Virtual function and overriding this method in the derived class */
     @Override
     public Double getFareForTheCharge() {
         double fare;
@@ -191,6 +195,7 @@ class SUV extends Vehicle {
     }
 
     // * Using the concept of Run time polymorphism and creating a function which will be created during the run time  */
+    //* Using the concept of Virtual function and overriding this method in the derived class */
     @Override
     public Double getFareForTheCharge() {
         double fare;
@@ -235,6 +240,7 @@ class OFFRoad extends Vehicle {
     }
 
     // * Using the concept of Run time polymorphism and creating a function which will be created during the run time  */
+    //* Using the concept of Virtual function and overriding this method in the derived class */
     @Override
     public Double getFareForTheCharge() {
         double fare;
