@@ -24,6 +24,7 @@ abstract class Vehicle {
         System.out.println("Total Fare Collected till Now. " + totalFareCollected + " INR.");
     }
 
+    //* Creating a method which will have there own implementation in the derived class by using polymorphism  */
     public abstract Double getFareForTheCharge();
 }
 
@@ -51,6 +52,8 @@ class Mini extends Vehicle {
         this.userEnteredInput = userEnteredInput;
     }
 
+    // * Using the concept of Run time polymorphism and creating a function which will be created during the run time  */
+    @Override
     public Double getFareForTheCharge() {
         double fare;
         if(userEnteredInput >= 75){
@@ -95,6 +98,8 @@ class Sedan extends Mini {
         this.userEnteredInput = userEnteredInput;
     }
 
+    // * Using the concept of Run time polymorphism and creating a function which will be created during the run time  */
+    @Override
     public Double getFareForTheCharge() {
         double fare;
         if(userEnteredInput >= 100){
@@ -139,6 +144,7 @@ class Luxurious_Sedan extends Vehicle {
         this.userEnteredInput = userEnteredInput;
     }
 
+    // * Using the concept of Run time polymorphism and creating a function which will be created during the run time  */
     @Override
     public Double getFareForTheCharge() {
         double fare;
@@ -184,6 +190,7 @@ class SUV extends Vehicle {
         this.userEnteredInput = userEnteredInput;
     }
 
+    // * Using the concept of Run time polymorphism and creating a function which will be created during the run time  */
     @Override
     public Double getFareForTheCharge() {
         double fare;
@@ -227,6 +234,7 @@ class OFFRoad extends Vehicle {
         this.userEnteredInput = userEnteredInput;
     }
 
+    // * Using the concept of Run time polymorphism and creating a function which will be created during the run time  */
     @Override
     public Double getFareForTheCharge() {
         double fare;
