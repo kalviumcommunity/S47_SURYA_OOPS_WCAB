@@ -10,11 +10,11 @@ abstract class Vehicle {
     public static int totalRides = 0;
     public static double totalFareCollected = 0.00;
 
+    private final FareCalculator fareCalculator;
+
     //* created a constructor */
-    protected Vehicle(Double baseCharge, Double chargesForTheNext15km, Double additionalDistanceCharge, Double userEnteredInput) {
-        this.baseCharge = baseCharge;
-        this.chargesForTheNext15km = chargesForTheNext15km;
-        this.additionalDistanceCharge = additionalDistanceCharge;
+    protected Vehicle(FareCalculator fareCalculator, Double userEnteredInput) {
+        this.fareCalculator = fareCalculator;
         this.userEnteredInput = userEnteredInput;
         totalRides++;
     }
@@ -26,84 +26,64 @@ abstract class Vehicle {
 
     //* Creating a method which will have there own implementation in the derived class by using polymorphism  */
     //* This method will be serving as a virtual method */
-    public abstract Double getFareForTheCharge();
+    public Double getFareForTheCharge() {
+        Double fare = fareCalculator.calculateFare(userEnteredInput);
+        totalFareCollected += fare;
+        return fare;
+    }
 }
+
+//* Creating an interface for Fare calculation */
+interface FareCalculator{
+    Double calculateFare(Double userEnteredInput);
+}
+
+
+//* Creating a Separate class to calculate the fare for the Mini Class */
+class MiniFareCalculator implements FareCalculator{
+    final private Double CHARGES_FOR_THE_BASE_CASE = 50.00; 
+    final private Double CHARGES_FOR_THE_NEXT_15KM = 10.00; 
+    final private Double OTHER_DISTANCE_CHARGES = 8.00; 
+
+    @Override
+    public Double calculateFare(Double userEnteredInput) {
+        double fare;
+        if (userEnteredInput >= 75) {
+            fare = OTHER_DISTANCE_CHARGES * userEnteredInput;
+        } else if (userEnteredInput <= 3) {
+            fare = CHARGES_FOR_THE_BASE_CASE * userEnteredInput;
+        } else if (userEnteredInput <= 18) {
+            double otherFifteenKm = userEnteredInput - 3;
+            fare = CHARGES_FOR_THE_BASE_CASE * 3 + (otherFifteenKm * CHARGES_FOR_THE_NEXT_15KM);
+        } else {
+            double restDistance = userEnteredInput - 18;
+            fare = CHARGES_FOR_THE_BASE_CASE * 3 + (CHARGES_FOR_THE_NEXT_15KM * 15) + (restDistance * OTHER_DISTANCE_CHARGES);
+        }
+        return fare;
+    }
+}
+
 
 //* Implemented encapsulation by wrapping method and variables in the same class */
 //* Implemented Multilevel inheritance by using the property of the base Vehicle class */ 
 class Mini extends Vehicle {
-    final private Double CHARGES_FOR_THE_BASE_CASE = 50.00; 
-    final private Double CHARGES_FOR_THE_NEXT_15KM = 10.00; 
-    final private Double OTHER_DISTANCE_CHARGES = 8.00; 
-    private Double otherFifteenKm;
-    private Double restDistance;
-        
-    //* Using that initialized constructor using the super keyword */
     public Mini(Double userEnteredInput) {
-        super(50.00, 10.00, 8.00, userEnteredInput);
-    }
-
-    //*  Accessor for userEnteredInput */
-    public Double getUserEnteredInput() {
-        return userEnteredInput; 
-    }
-
-    //*  Mutator for userEnteredInput */
-    public void setUserEnteredInput(Double userEnteredInput) {
-        this.userEnteredInput = userEnteredInput;
-    }
-
-    // * Using the concept of Run time polymorphism and creating a function which will be created during the run time  */
-    //* Using the concept of Virtual function and overriding this method in the derived class */
-    @Override
-    public Double getFareForTheCharge() {
-        double fare;
-        if(userEnteredInput >= 75){
-            fare = OTHER_DISTANCE_CHARGES * userEnteredInput;
-        }else if (userEnteredInput <= 3) {
-            fare = CHARGES_FOR_THE_BASE_CASE * userEnteredInput;
-        } else if (userEnteredInput <= 18) {
-            otherFifteenKm = userEnteredInput - 3;
-            fare = CHARGES_FOR_THE_BASE_CASE * 3  + (otherFifteenKm * CHARGES_FOR_THE_NEXT_15KM);
-        } else {
-            restDistance = userEnteredInput - 18;
-            fare = CHARGES_FOR_THE_BASE_CASE * 3 + (CHARGES_FOR_THE_NEXT_15KM * 15) + (restDistance * OTHER_DISTANCE_CHARGES);
-        }
-        totalFareCollected += fare;
-        return  fare;
+        super(new MiniFareCalculator(), userEnteredInput);
     }
 }
 
-//* Implemented encapsulation by wrapping method and variables in the same class */ 
-//* Implemented Hierarchial inheritance by using the property of one of the Derived Mini class */
-class Sedan extends Mini {
-
+//* Similarly creating a separate class class to calculate the fare for the Mini Class */
+class SedanFareCalculator implements FareCalculator{
     final private Double CHARGES_FOR_THE_BASE_CASE = 80.00; //*Protected variable which can be used in the same class and the derived class */
     final private Double CHARGES_FOR_THE_NEXT_15KM = 12.00; //*Protected variable which can be used in the same class and the derived class */
     final private Double OTHER_DISTANCE_CHARGES = 10.00; //*Protected variable which can be used in the same class and the derived class */
     private Double otherFifteenKm;
     private Double restDistance;
 
-    //* Using that initialized constructor using the super keyword */
-
-    public Sedan(Double userEnteredInput) {
-        super(userEnteredInput);
-    }
-
-    //*  Accessor for userEnteredInput */
-    public Double getUserEnteredInput() {
-        return userEnteredInput; 
-    }
-
-    //*  Mutator for userEnteredInput */
-    public void setUserEnteredInput(Double userEnteredInput) {
-        this.userEnteredInput = userEnteredInput;
-    }
-
     // * Using the concept of Run time polymorphism and creating a function which will be created during the run time  */
     //* Using the concept of Virtual function and overriding this method in the derived class */
     @Override
-    public Double getFareForTheCharge() {
+    public Double calculateFare(Double userEnteredInput) {
         double fare;
         if(userEnteredInput >= 100){
             fare = OTHER_DISTANCE_CHARGES * userEnteredInput;
@@ -116,41 +96,30 @@ class Sedan extends Mini {
             restDistance = userEnteredInput - 20;
             fare = CHARGES_FOR_THE_BASE_CASE * 5 + (CHARGES_FOR_THE_NEXT_15KM * 15) + (restDistance * OTHER_DISTANCE_CHARGES);
         }
-        totalFareCollected += fare;
         return fare;
     }
-
 }
 
 //* Implemented encapsulation by wrapping method and variables in the same class */ 
 //* Implemented Hierarchial inheritance by using the property of one of the Derived Mini class */
-class Luxurious_Sedan extends Vehicle {
+class Sedan extends Vehicle {
+    //* Using that initialized constructor using the super keyword */
+    public Sedan(Double userEnteredInput) {
+        super(new SedanFareCalculator(), userEnteredInput);
+    }
 
+}
+
+//* Similarly creating a Separate class to calculate the fare for the Mini Class */
+class Luxurious_SedanFareCalculator implements FareCalculator{
     final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*Protected variable which can be used in the same class and the derived class */
     final private Double CHARGES_FOR_THE_NEXT_15KM = 25.00; //*Protected variable which can be used in the same class and the derived class */
     final private Double OTHER_DISTANCE_CHARGES = 25.00; //*Protected variable which can be used in the same class and the derived class */
     private Double otherFifteenKm;
-    private Double restDistance;
+    private Double restDistance; 
 
-    //* Using that initialized constructor using the super keyword */
-    public Luxurious_Sedan(Double userInputForLuxuriousSedan) {
-        super(100.00, 25.00, 25.00, userInputForLuxuriousSedan);
-    }
-
-    //*  Accessor for userEnteredInput */
-    public Double getUserEnteredInput() {
-        return userEnteredInput; 
-    }
-
-    //*  Mutator for userEnteredInput */
-    public void setUserEnteredInput(Double userEnteredInput) {
-        this.userEnteredInput = userEnteredInput;
-    }
-
-    // * Using the concept of Run time polymorphism and creating a function which will be created during the run time  */
-    //* Using the concept of Virtual function and overriding this method in the derived class */
     @Override
-    public Double getFareForTheCharge() {
+    public Double calculateFare(Double userEnteredInput) {
         double fare;
         if(userEnteredInput >= 100){
             fare = OTHER_DISTANCE_CHARGES * userEnteredInput;
@@ -163,41 +132,30 @@ class Luxurious_Sedan extends Vehicle {
             restDistance = userEnteredInput - 20;
             fare = CHARGES_FOR_THE_BASE_CASE * 5  + (CHARGES_FOR_THE_NEXT_15KM * 15) + (restDistance * OTHER_DISTANCE_CHARGES);
         }
-        totalFareCollected += fare;
         return fare;
+    }
+}
+
+//* Implemented encapsulation by wrapping method and variables in the same class */ 
+//* Implemented Hierarchial inheritance by using the property of one of the Derived Mini class */
+class Luxurious_Sedan extends Vehicle {
+    //* Using that initialized constructor using the super keyword */
+    public Luxurious_Sedan(Double userEnteredInput) {
+        super(new Luxurious_SedanFareCalculator(), userEnteredInput);
     }
 
 }
 
-//* Implemented encapsulation by wrapping method and variables in the same class */
-//* Implemented Multilevel inheritance by using the property of base Vehicle class */
-class SUV extends Vehicle {
-
+//* Similarly creating a Separate class to calculate the fare for the SUV Class */
+class SUVFareCalculator implements FareCalculator{
     final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*Protected variable which can be used in the same class and the derived class */
     final private Double CHARGES_FOR_THE_NEXT_15KM = 15.00; //*Protected variable which can be used in the same class and the derived class */
     final private Double OTHER_DISTANCE_CHARGES = 12.00; //*Protected variable which can be used in the same class and the derived class */
     private Double otherFifteenKm;
     private Double restDistance;
 
-    //* Using that initialized constructor using the super keyword */
-    public SUV(Double userEnteredInput) {
-        super(100.00, 15.00, 12.00, userEnteredInput);
-    }
-
-    //*  Accessor for userEnteredInput */
-    public Double getUserEnteredInput() {
-        return userEnteredInput; 
-    }
-
-    //*  Mutator for userEnteredInput */
-    public void setUserEnteredInput(Double userEnteredInput) {
-        this.userEnteredInput = userEnteredInput;
-    }
-
-    // * Using the concept of Run time polymorphism and creating a function which will be created during the run time  */
-    //* Using the concept of Virtual function and overriding this method in the derived class */
     @Override
-    public Double getFareForTheCharge() {
+    public Double calculateFare(Double userEnteredInput) {
         double fare;
         if (userEnteredInput <= 5) {
             fare = CHARGES_FOR_THE_BASE_CASE * userEnteredInput;
@@ -208,41 +166,29 @@ class SUV extends Vehicle {
             restDistance = userEnteredInput - 20;
             fare = CHARGES_FOR_THE_BASE_CASE * 5  + (CHARGES_FOR_THE_NEXT_15KM * 15) + (restDistance * OTHER_DISTANCE_CHARGES);
         }
-        totalFareCollected += fare;
         return fare;
+    }
+}
+//* Implemented encapsulation by wrapping method and variables in the same class */
+//* Implemented Multilevel inheritance by using the property of base Vehicle class */
+class SUV extends Vehicle {
+    //* Using that initialized constructor using the super keyword */
+    public SUV(Double userEnteredInput) {
+        super(new SUVFareCalculator(), userEnteredInput);
     }
 
 }
 
-//* Implemented encapsulation by wrapping method and variables in the same class */ 
-//* Implemented Multilevel inheritance by using the property of base Vehicle class */
-class OFFRoad extends Vehicle {
-
+//* Similarly creating a Separate class to calculate the fare for the OFFRoad Class */
+class OFFRoadFareCalculator implements FareCalculator{
     final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*Protected variable which can be used in the same class and the derived class */
     final private Double CHARGES_FOR_THE_NEXT_15KM = 20.00; //*Protected variable which can be used in the same class and the derived class */
     final private Double OTHER_DISTANCE_CHARGES = 25.00; //*Protected variable which can be used in the same class and the derived class */
     private Double otherFifteenKm;
     private Double restDistance;
 
-    //* Using that initialized constructor using the super keyword */
-    public OFFRoad(Double userEnteredInput) {
-        super(100.00, 20.00, 25.00, userEnteredInput);
-    }
-
-    //*  Accessor for userEnteredInput */
-    public Double getUserEnteredInput() {
-        return userEnteredInput; 
-    }
-
-    //*  Mutator for userEnteredInput */
-    public void setUserEnteredInput(Double userEnteredInput) {
-        this.userEnteredInput = userEnteredInput;
-    }
-
-    // * Using the concept of Run time polymorphism and creating a function which will be created during the run time  */
-    //* Using the concept of Virtual function and overriding this method in the derived class */
     @Override
-    public Double getFareForTheCharge() {
+    public Double calculateFare(Double userEnteredInput) {
         double fare;
         if (userEnteredInput <= 5) {
             fare = CHARGES_FOR_THE_BASE_CASE * userEnteredInput;
@@ -253,8 +199,16 @@ class OFFRoad extends Vehicle {
             restDistance = userEnteredInput - 20;
             fare = CHARGES_FOR_THE_BASE_CASE * 5  + (CHARGES_FOR_THE_NEXT_15KM * 15) + (restDistance * OTHER_DISTANCE_CHARGES);
         }
-        totalFareCollected += fare;
         return fare;
+    }
+}
+
+//* Implemented encapsulation by wrapping method and variables in the same class */ 
+//* Implemented Multilevel inheritance by using the property of base Vehicle class */
+class OFFRoad extends Vehicle {
+    //* Using that initialized constructor using the super keyword */
+    public OFFRoad(Double userEnteredInput) {
+        super(new OFFRoadFareCalculator(), userEnteredInput);
     }
 
 }
