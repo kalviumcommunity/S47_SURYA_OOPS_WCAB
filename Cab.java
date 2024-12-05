@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 //* Created an abstract class which will serve as a base class */
+//*  The base class Vehicle provides a general abstraction for all vehicles.*/
+//* The method `getFareForTheCharge` is defined here and is reused by all subclasses.*/
+//* This ensures that all subclasses can be treated as a Vehicle, adhering to LSP. */
 abstract class Vehicle {
     protected Double baseCharge;
     protected Double chargesForTheNext15km;
@@ -12,7 +15,8 @@ abstract class Vehicle {
 
     private final FareCalculator fareCalculator;
 
-    //* created a constructor */
+    //* The constructor accepts a FareCalculator object, promoting flexibility. */
+    //* Subclasses can provide their specific FareCalculator implementations. */
     protected Vehicle(FareCalculator fareCalculator, Double userEnteredInput) {
         this.fareCalculator = fareCalculator;
         this.userEnteredInput = userEnteredInput;
@@ -24,8 +28,9 @@ abstract class Vehicle {
         System.out.println("Total Fare Collected till Now. " + totalFareCollected + " INR.");
     }
 
-    //* Creating a method which will have there own implementation in the derived class by using polymorphism  */
-    //* This method will be serving as a virtual method */
+    //* The method `getFareForTheCharge` is defined in the base class but depends */
+    //* on the FareCalculator interface. This ensures that the behavior can vary */
+    //* based on the subclass while maintaining a consistent interface. */
     public Double getFareForTheCharge() {
         Double fare = fareCalculator.calculateFare(userEnteredInput);
         totalFareCollected += fare;
@@ -33,13 +38,16 @@ abstract class Vehicle {
     }
 }
 
-//* Creating an interface for Fare calculation */
+//* The FareCalculator interface allows each subclass to define its own fare calculation logic. */
+//* By introducing this interface, the base class (Vehicle) is not tightly coupled to any specific logic. */
+//* This adheres to LSP, as any class implementing FareCalculator can seamlessly replace another. */
 interface FareCalculator{
     Double calculateFare(Double userEnteredInput);
 }
 
 
-//* Creating a Separate class to calculate the fare for the Mini Class */
+//* The MiniFareCalculator implements specific fare calculation logic for Mini vehicles. */ 
+//* This adheres to LSP as Mini can be substituted anywhere Vehicle is used. */
 class MiniFareCalculator implements FareCalculator{
     final private Double CHARGES_FOR_THE_BASE_CASE = 50.00; 
     final private Double CHARGES_FOR_THE_NEXT_15KM = 10.00; 
@@ -64,15 +72,16 @@ class MiniFareCalculator implements FareCalculator{
 }
 
 
-//* Implemented encapsulation by wrapping method and variables in the same class */
-//* Implemented Multilevel inheritance by using the property of the base Vehicle class */ 
+//* The Mini class uses MiniFareCalculator for fare calculation. */
+//* Mini can be substituted anywhere Vehicle is used because it overrides the behavior */
+//* through the constructor, adhering to LSP. */
 class Mini extends Vehicle {
     public Mini(Double userEnteredInput) {
         super(new MiniFareCalculator(), userEnteredInput);
     }
 }
-
-//* Similarly creating a separate class class to calculate the fare for the Mini Class */
+//* The SedanFareCalculator implements specific fare calculation logic for Sedan category vehicles. */ 
+//* This adheres to LSP as Sedan can be substituted anywhere Vehicle is used. */
 class SedanFareCalculator implements FareCalculator{
     final private Double CHARGES_FOR_THE_BASE_CASE = 80.00; //*Protected variable which can be used in the same class and the derived class */
     final private Double CHARGES_FOR_THE_NEXT_15KM = 12.00; //*Protected variable which can be used in the same class and the derived class */
@@ -80,8 +89,6 @@ class SedanFareCalculator implements FareCalculator{
     private Double otherFifteenKm;
     private Double restDistance;
 
-    // * Using the concept of Run time polymorphism and creating a function which will be created during the run time  */
-    //* Using the concept of Virtual function and overriding this method in the derived class */
     @Override
     public Double calculateFare(Double userEnteredInput) {
         double fare;
@@ -100,8 +107,9 @@ class SedanFareCalculator implements FareCalculator{
     }
 }
 
-//* Implemented encapsulation by wrapping method and variables in the same class */ 
-//* Implemented Hierarchial inheritance by using the property of one of the Derived Mini class */
+//* The Sedan class uses SedanFareCalculator for fare calculation. */
+//* Sedan can be substituted anywhere Vehicle is used because it overrides the behavior */
+//* through the constructor, adhering to LSP. */
 class Sedan extends Vehicle {
     //* Using that initialized constructor using the super keyword */
     public Sedan(Double userEnteredInput) {
@@ -110,7 +118,8 @@ class Sedan extends Vehicle {
 
 }
 
-//* Similarly creating a Separate class to calculate the fare for the Mini Class */
+//* The Luxurious_SedanFareCalculator implements specific fare calculation logic for Luxurious_Sedan category vehicles. */ 
+//* This adheres to LSP as Luxurious_Sedan can be substituted anywhere Vehicle is used. */
 class Luxurious_SedanFareCalculator implements FareCalculator{
     final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*Protected variable which can be used in the same class and the derived class */
     final private Double CHARGES_FOR_THE_NEXT_15KM = 25.00; //*Protected variable which can be used in the same class and the derived class */
@@ -136,8 +145,9 @@ class Luxurious_SedanFareCalculator implements FareCalculator{
     }
 }
 
-//* Implemented encapsulation by wrapping method and variables in the same class */ 
-//* Implemented Hierarchial inheritance by using the property of one of the Derived Mini class */
+//* The Luxurious_Sedan class uses Luxurious_SedanFareCalculator for fare calculation. */
+//* Luxurious_Sedan can be substituted anywhere Vehicle is used because it overrides the behavior */
+//* through the constructor, adhering to LSP. */
 class Luxurious_Sedan extends Vehicle {
     //* Using that initialized constructor using the super keyword */
     public Luxurious_Sedan(Double userEnteredInput) {
@@ -146,7 +156,8 @@ class Luxurious_Sedan extends Vehicle {
 
 }
 
-//* Similarly creating a Separate class to calculate the fare for the SUV Class */
+//* The SUVFareCalculator implements specific fare calculation logic for SUV category vehicles. */ 
+//* This adheres to LSP as SUV can be substituted anywhere Vehicle is used. */
 class SUVFareCalculator implements FareCalculator{
     final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*Protected variable which can be used in the same class and the derived class */
     final private Double CHARGES_FOR_THE_NEXT_15KM = 15.00; //*Protected variable which can be used in the same class and the derived class */
@@ -169,8 +180,9 @@ class SUVFareCalculator implements FareCalculator{
         return fare;
     }
 }
-//* Implemented encapsulation by wrapping method and variables in the same class */
-//* Implemented Multilevel inheritance by using the property of base Vehicle class */
+//* The SUV class uses SUVFareCalculator for fare calculation. */
+//* SUV can be substituted anywhere Vehicle is used because it overrides the behavior */
+//* through the constructor, adhering to LSP. */
 class SUV extends Vehicle {
     //* Using that initialized constructor using the super keyword */
     public SUV(Double userEnteredInput) {
@@ -179,7 +191,8 @@ class SUV extends Vehicle {
 
 }
 
-//* Similarly creating a Separate class to calculate the fare for the OFFRoad Class */
+//* The OFFRoadFareCalculator implements specific fare calculation logic for OFFRoad category vehicles. */ 
+//* This adheres to LSP as OFFRoad can be substituted anywhere Vehicle is used. */
 class OFFRoadFareCalculator implements FareCalculator{
     final private Double CHARGES_FOR_THE_BASE_CASE = 100.00; //*Protected variable which can be used in the same class and the derived class */
     final private Double CHARGES_FOR_THE_NEXT_15KM = 20.00; //*Protected variable which can be used in the same class and the derived class */
@@ -203,8 +216,9 @@ class OFFRoadFareCalculator implements FareCalculator{
     }
 }
 
-//* Implemented encapsulation by wrapping method and variables in the same class */ 
-//* Implemented Multilevel inheritance by using the property of base Vehicle class */
+//* The OFFRoad class uses OFFRoadFareCalculator for fare calculation. */
+//* OFFRoad can be substituted anywhere Vehicle is used because it overrides the behavior */
+//* through the constructor, adhering to LSP. */
 class OFFRoad extends Vehicle {
     //* Using that initialized constructor using the super keyword */
     public OFFRoad(Double userEnteredInput) {
