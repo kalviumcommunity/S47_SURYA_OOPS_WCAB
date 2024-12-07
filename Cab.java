@@ -4,45 +4,46 @@ import java.util.Scanner;
 //*  The base class Vehicle provides a general abstraction for all vehicles.*/
 //* The method `getFareForTheCharge` is defined here and is reused by all subclasses.*/
 //* This ensures that all subclasses can be treated as a Vehicle, adhering to LSP. */
+//* modified the abstract class to call the RideStatistics class to update the user ride statistics*/
 abstract class Vehicle {
-    protected Double baseCharge;
-    protected Double chargesForTheNext15km;
-    protected Double additionalDistanceCharge;
     protected Double userEnteredInput;
-
-    public static int totalRides = 0;
-    public static double totalFareCollected = 0.00;
 
     private final FareCalculator fareCalculator;
 
-    //* The constructor accepts a FareCalculator object, promoting flexibility. */
-    //* Subclasses can provide their specific FareCalculator implementations. */
     protected Vehicle(FareCalculator fareCalculator, Double userEnteredInput) {
         this.fareCalculator = fareCalculator;
         this.userEnteredInput = userEnteredInput;
-        totalRides++;
     }
 
-    public static void displayUserHistory(){
-        System.out.println("Total Rides till Now. " + totalRides);
-        System.out.println("Total Fare Collected till Now. " + totalFareCollected + " INR.");
-    }
-
-    //* The method `getFareForTheCharge` is defined in the base class but depends */
-    //* on the FareCalculator interface. This ensures that the behavior can vary */
-    //* based on the subclass while maintaining a consistent interface. */
-    public Double getFareForTheCharge() {
+    public Double calculateFare() {
         Double fare = fareCalculator.calculateFare(userEnteredInput);
-        totalFareCollected += fare;
+        RideStatistics.addRide(fare);  
         return fare;
     }
 }
+
 
 //* The FareCalculator interface allows each subclass to define its own fare calculation logic. */
 //* By introducing this interface, the base class (Vehicle) is not tightly coupled to any specific logic. */
 //* This adheres to LSP, as any class implementing FareCalculator can seamlessly replace another. */
 interface FareCalculator{
     Double calculateFare(Double userEnteredInput);
+}
+
+//* Creating a  separate class for ride Statistics where it's sole responsibility is to manage and display the user statistics*/
+class RideStatistics {
+    private static int totalRides = 0;
+    private static double totalFareCollected = 0.00;
+
+    public static void addRide(double fare) {
+        totalRides++;
+        totalFareCollected += fare;
+    }
+
+    public static void displayStatistics() {
+        System.out.println("Total Rides till Now: " + totalRides);
+        System.out.println("Total Fare Collected till Now: " + totalFareCollected + " INR.");
+    }
 }
 
 
@@ -294,9 +295,11 @@ public class Cab {
 
         System.out.println("Total Fare Calculations:");
         for (int j = 0; j < totalUserInput; j++) {
-            System.out.println("Customer " + (j + 1) + " fare: " + cabs[j].getFareForTheCharge() + " INR.");
+            System.out.println("Customer " + (j + 1) + " fare: " + cabs[j].calculateFare() + " INR.");
         }
-        Vehicle.displayUserHistory();
+
+        //* Directly using the method to display the user's statistics by using the newly created RideStatistics class */
+        RideStatistics.displayStatistics();
         System.out.println("<---------------------------------------------->");
         reader.close();
     }
